@@ -1,168 +1,142 @@
-# Flexy Dev - Next.js Portfolio Template
+# Portafolio personal de Marlon Gutiérrez
 
-![](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
+Portafolio web personal con un sistema de administración para gestionar proyectos, habilidades, secciones, traducciones y publicaciones del blog. La aplicación está construida con Next.js, React y TypeScript; Supabase sirve como base de datos y plataforma de autenticación.
 
-![](https://img.shields.io/badge/license-MIT-blue.svg)
+## Tecnologías
 
-[![Premium Version](https://img.shields.io/badge/PREMIUM_%20VERSION-AVAILABLE-%2300C7B7?style=for-the-badge&logo=stellar&logoColor=white)](https://basit313.gumroad.com/l/nextjs-developer-portfolio-template)
+- Next.js 16 y React 19
+- TypeScript con modo estricto
+- Tailwind CSS 4
+- Supabase: PostgreSQL, autenticación, políticas RLS y actualizaciones en tiempo real
+- Cloudinary para las imágenes administradas desde el panel
+- Resend para notificaciones por correo del formulario de contacto
+- Gemini API para asistencia opcional al redactar y traducir publicaciones
 
-✨ **Professional Portfolio Template** built with Next.js 15 • 🚀 Tailwind V4 • 📱 Fully Responsive • 🎨 Modern Design • 🔍 SEO Friendly
+## Funcionalidades
 
-![Next.js Portfolio Template Hero Section](https://ik.imagekit.io/cpnw7c0xpe/Tailwind%20Components/Templates/Flexy%20Dev%20Cover%20New.png?updatedAt=1741812978958)
+- Portafolio adaptable con secciones de presentación, habilidades, proyectos, servicios, soporte técnico y contacto.
+- Contenido dinámico administrable desde Supabase y el panel privado `/admin`.
+- Panel de administración para proyectos, habilidades, íconos, secciones, traducciones, testimonios, ajustes y publicaciones.
+- Blog con editor enriquecido, borradores, publicaciones, categorías, etiquetas, traducciones al español e inglés, RSS y conteo de vistas.
+- Interfaz disponible en español, inglés, francés, alemán y ruso; el contenido del blog admite español e inglés.
+- Cuatro temas visuales y preferencias de presentación configurables desde el panel.
+- Carga de imágenes a Cloudinary y galería de imágenes para proyectos.
+- Actualizaciones en tiempo real de contenido compatible cuando Realtime está habilitado en Supabase.
+- SEO con metadata, datos estructurados, sitemap, robots.txt y tarjetas para redes sociales.
 
-## 🚀 How to Run the Project
+## Requisitos
 
-Follow these steps to set up and run the project locally:
+- Node.js 22 o posterior.
+- npm.
+- Un proyecto de Supabase para usar el contenido dinámico y el panel de administración.
 
-### 1️⃣ Install Dependencies
+## Instalación y configuración
 
-After downloading/cloning the project, navigate to the project directory and run:
+1. Clona este repositorio e instala las dependencias:
+
+   ```bash
+   npm install
+   ```
+
+2. Crea un archivo `.env.local` en la raíz del proyecto. Configura como mínimo:
+
+   ```env
+   NEXT_PUBLIC_SITE_URL=http://localhost:3000
+   NEXT_PUBLIC_SUPABASE_URL=https://TU_PROYECTO.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=TU_CLAVE_ANON
+   SUPABASE_SERVICE_ROLE_KEY=TU_CLAVE_SERVICE_ROLE
+   ```
+
+   Las claves de Supabase se encuentran en la configuración del proyecto. La clave `SUPABASE_SERVICE_ROLE_KEY` es privada: no la expongas en el navegador ni la agregues al repositorio.
+
+3. Configura la base de datos:
+
+   - Abre el SQL Editor de tu proyecto Supabase.
+   - Ejecuta, en orden numérico, los archivos de `supabase/migrations/`.
+   - Crea el usuario administrador desde Authentication en Supabase.
+   - Revisa que las tablas y políticas RLS de las migraciones estén aplicadas.
+   - Para que los cambios se propaguen en tiempo real, habilita la publicación `supabase_realtime` para las tablas indicadas en las migraciones.
+
+4. Inicia el servidor de desarrollo:
+
+   ```bash
+   npm run dev
+   ```
+
+   Abre `http://localhost:3000`. El panel administrativo está en `/admin/login`.
+
+## Variables de entorno
+
+| Variable | Requerida | Uso |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Sí para despliegue | URL pública del sitio; en desarrollo puede ser `http://localhost:3000`. Se usa para metadata, SEO y enlaces del blog. |
+| `NEXT_PUBLIC_SUPABASE_URL` | Sí | URL del proyecto Supabase. |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Sí | Clave pública anon de Supabase, restringida por las políticas RLS. |
+| `SUPABASE_SERVICE_ROLE_KEY` | Sí para operaciones administrativas | Clave privada usada en el servidor para operaciones privilegiadas. Nunca debe llevar el prefijo `NEXT_PUBLIC_`. |
+| `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Opcional | Nombre de la nube de Cloudinary para la carga de imágenes. |
+| `CLOUDINARY_API_KEY` | Opcional | Clave de API de Cloudinary, requerida para las cargas firmadas. |
+| `CLOUDINARY_API_SECRET` | Opcional | Secreto de Cloudinary; mantenerlo únicamente en el servidor. |
+| `RESEND_API_KEY` | Opcional | Activa el envío de notificaciones del formulario de contacto. |
+| `CONTACT_EMAIL` | Opcional | Dirección que recibe las notificaciones enviadas mediante Resend. |
+| `AI_GEMINI_API_KEY` | Opcional | Activa las herramientas de generación y traducción asistidas por IA del editor del blog. |
+| `AI_MODEL` | Opcional | Modelo Gemini que se intenta primero; si no se define, se usa `gemini-flash-latest`. |
+
+Cloudinary, Resend y Gemini son integraciones opcionales. Sin configurar Resend, los mensajes de contacto siguen guardándose en Supabase, pero no se envía el correo de notificación. Las funciones que dependen de Cloudinary o Gemini requieren sus respectivas credenciales.
+
+## Comandos
 
 ```bash
-npm install
-# or
-yarn install
+npm run dev     # Servidor local con Turbopack
+npm run lint    # ESLint
+npm run build   # Build de producción
+npm run start   # Servidor de producción local
 ```
 
-This will install all required dependencies.
+## Panel de administración
 
-### 2️⃣ Start the Development Server
+Inicia sesión en `/admin/login` con un usuario creado en Supabase Authentication. Desde `/admin` puedes gestionar:
 
-Once the installation is complete, start the server with:
+- Proyectos, imágenes de portada y galerías.
+- Habilidades, íconos y orden de visualización.
+- Secciones e ítems de servicios y soporte técnico.
+- Testimonios, traducciones y ajustes del sitio.
+- Publicaciones del blog, categorías y contenido traducido.
 
-```bash
-npm run dev
-# or
-yarn dev
+El acceso a los datos está controlado por las políticas RLS de Supabase. Aplica las migraciones del repositorio antes de usar el panel.
+
+## Estructura del proyecto
+
+```text
+content/                  Datos JSON de referencia
+docs/                     Guías y documentación técnica
+src/
+  actions/                Server Actions y acceso a datos
+  app/                    Rutas de Next.js, API, blog y administración
+  appData/                Datos de presentación del sitio
+  components/             Componentes de interfaz organizados por sección
+  context/                Contextos de idioma y visibilidad de secciones
+  i18n/                   Traducciones de la interfaz
+  lib/                    Clientes e integraciones de servidor
+  services/               Servicios de acceso a contenido
+  utils/                  Utilidades compartidas
+supabase/
+  migrations/             Esquema, políticas y configuración de la base de datos
 ```
 
-Your portfolio will now be running at `http://localhost:3000`.
+El contenido principal en producción se obtiene de Supabase. Los archivos JSON de `content/` se conservan como datos de referencia y no reemplazan la configuración de la base de datos.
 
-### ⚠️ Important: Set Up Environment Variables
+## Despliegue
 
-Before running the project, make sure to create a `.env.local` file in the root directory and add the following:
+El proyecto puede desplegarse en una plataforma compatible con Next.js. Antes de publicar:
 
-```env
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-```
+1. Configura en el proveedor las variables de entorno requeridas para producción.
+2. Define `NEXT_PUBLIC_SITE_URL` con el dominio público definitivo.
+3. Aplica las migraciones de Supabase y crea el usuario administrador.
+4. Añade las credenciales de Cloudinary, Resend o Gemini solo si vas a habilitar esas integraciones.
+5. Ejecuta `npm run build` para verificar el build de producción.
 
-This ensures proper configuration of environment variables.
+No compartas ni subas al repositorio claves privadas, archivos `.env.local` o credenciales de servicio.
 
-## Folder Structure Overview
+## Proyecto original
 
-![Next.js portfolio template folder structure overview](https://ik.imagekit.io/cpnw7c0xpe/Tailwind%20Components/Templates/Folder%20Structure%20Overview.png?updatedAt=1741684501824)
-
-- **content:** Contains data for projects. Add any additional section data here.
-- **Components:** All the UI components of app e.g. navbar, hero, projects, footer etc
-- **src/services:** Retrieves data (e.g., projects, testimonials) using the fs module. Update this file if you change or modify the data source.
-- **src/assets:** Stores all assets, including images and icons, additionally you can add audio, video, and local fonts here.
-- **src/hooks:** Holds custom hooks.
-- **src/lib/types.d.ts:** Contains TypeScript types.
-- **util/icons:** Centralizes icons and images for easy updates.
-- **appData:** Includes app data, such as services and skills (including icons).
-- **app/page.tsx:** Root file of the app.
-- **app/layout.tsx:** Manages global and SEO configurations (e.g., fonts, head tags, analytics).
-
-## Customizing the Template
-
-> **Note:** The Testimonials section has been temporarily commented out in `src/app/page.tsx`. You can reactivate it anytime by uncommenting the relevant lines.
-
-1. Navbar
-   - File: navbar.tsx
-     - Update the navbar name from john_doe to your name.
-2. Hero Section
-   - File: hero.tsx
-     - Edit the title, description, and optionally, replace the SVG with your image.
-3. Projects Section
-   - File: content/projects
-     - Replace the dummy projects with your own.
-     - If you are modifying the properties or going to add new ones, then update types in types.d.ts.
-4. Services Section
-   - File: appData
-     - Add your services with relevant icons. If icons are missing, contact me on LinkedIn or via email.
-5. Skills Section
-   - File: appData
-     - Add your skills with relevant icons. Contact if you can’t find specific icons online.
-6. Footer
-   - Location: Visit [Flexy UI](http://flexyui.com/)
-     - You can replace the default footer or choose from additional variants [from Flexy UI](http://flexyui.com/) (simple or column footer).
-
-In the same manner, you can also update the Contact and Testimonial sections. The code is self-explanatory.
-
-![Project section](https://ik.imagekit.io/cpnw7c0xpe/Tailwind%20Components/Templates/flexy-dev-portfolio-portfolio.png?updatedAt=1739182152345)
-
-## 📨 Configuring the Contact Section
-
-To integrate **Formspree** into your contact form, follow these simple steps:
-
-1. Go to the [Formspree website](https://formspree.io/) and create a new project.
-2. Add a new form (you'll get a unique form endpoint URL).
-3. Copy the form endpoint and paste it into your `.env.local` file like this:
-
-```env
-CONTACT_FORM_ACTION_URL=https://formspree.io/f/your-form-id
-```
-
-> Note: This URL is just an endpoint to receive your form submissions. You can use any service of your choice (like Formcarry, Getform, or your own API) if you're not using Formspree.
-
-Make sure the name attributes in your form match what your form handler or service expects (e.g., `name`, `email`, `subject`, `message`).
-
-## Configuring Online Images
-
-To display online images (e.g., from a CDN) in your deployed project, configure allowed image hostnames in next.config.js.
-
-For demo purposes, we’re using Unsplash images. You can use any image host, but be sure to add the hostname in your configuration.
-
-Replace 'unsplash' with your own image `hostnames` if using a different service or add a new object.
-
-## Theming and Styling
-
-We use Tailwind CSS for styling. In `global.css`, you can customize theme variables for all 3 themes.
-
-## SEO & Branding
-
-1. Favicon: Replace the default favicon with your own.
-2. Metadata: Update meta title and description in layout.tsx.
-3. SEO Files: robots.ts and sitemap.ts are included for search engines.
-4. Open Graph Images:
-   - Replace `opengraph-image.png` and `twitter-image.png `with custom images.
-   - Alternatively, edit `opengraph-image.tsx` to generate images dynamically.
-
-### If you find this template helpful, don't forget to ⭐️ the repo!
-
-## 💎 Upgrade to Premium
-
-✨ **Premium Features Include:**
-
-In premium template you will get one extra feature
-
-- 📝 MDX Blog System with code snippets
-
-[Get Premium Version](https://basit313.gumroad.com/l/nextjs-developer-portfolio-template) | [View Premium Demo](https://nextjs-dev-portfolio.netlify.app/)
-
-## 🆓 vs 💎 Premium
-
-| **Feature**       | **Free Version** | **Premium Version** |
-| ----------------- | ---------------- | ------------------- |
-| Blog System (MDX) | ❌               | ✅ Full Integration |
-| UI Components     | 20               | 25+                 |
-| Email Support     | ✅               | ✅ Priority         |
-
-![footer section](https://ik.imagekit.io/cpnw7c0xpe/Tailwind%20Components/Templates/flexy-dev-footer.png?updatedAt=1741813601842)
-
-## Analytics
-
-You can integrate analytics easily:
-
-1. Simple Analytics or Vercel Analytics: Quick and easy to set up.
-2. Google Analytics 4: Also straightforward.
-
-## Deployment Notes
-
-Before deploying, add environment variables from .env.local wherever you are deploying:
-
-1. NEXT_PUBLIC_SITE_URL: Set to your actual site URL (e.g., https://johndoe.com).
-1. CONTACT_FORM_ACTION_URL: Your [formspree](https://formspree.io/) url.
-1. For local development, use the localhost URL.
-
-For any query or suggestion, I am available on [LinkedIn](https://www.linkedin.com/in/abdulbasitprofile/) or email me at basit@codevertiser.com
+Este proyecto se inició como un fork de [AbdulBasit313/nextjs-portfolio-template](https://github.com/AbdulBasit313/nextjs-portfolio-template).
