@@ -9,8 +9,10 @@ import ImageUpload from './ImageUpload'
 
 interface TipTapEditorProps {
   content?: Record<string, unknown> | null
+  initialHtml?: string
   onChange: (html: string, json: Record<string, unknown>) => void
   placeholder?: string
+  id?: string
 }
 
 function ToolbarButton({
@@ -38,7 +40,7 @@ function ToolbarButton({
   )
 }
 
-export default function TipTapEditor({ content, onChange, placeholder }: TipTapEditorProps) {
+export default function TipTapEditor({ content, initialHtml, onChange, placeholder, id }: TipTapEditorProps) {
   const [showImageModal, setShowImageModal] = useState(false)
 
   const editor = useEditor({
@@ -48,9 +50,9 @@ export default function TipTapEditor({ content, onChange, placeholder }: TipTapE
       Placeholder.configure({ placeholder: placeholder ?? 'Escribe tu historia…' }),
       CharacterCount,
     ],
-    content: (content as never) ?? null,
+    content: initialHtml ?? (content as never) ?? null,
     editorProps: {
-      attributes: { class: 'tiptap' },
+      attributes: { class: 'tiptap', ...(id && { id }) },
     },
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML(), editor.getJSON() as Record<string, unknown>)

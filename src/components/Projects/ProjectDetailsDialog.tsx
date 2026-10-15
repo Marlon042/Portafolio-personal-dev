@@ -152,9 +152,10 @@ const ProjectDetailsDialog: React.FC<ProjectDetailsDialogProps> = ({ project, im
               </span>
             )}
             <h3 className="text-base font-semibold text-white">{t('projects.description')}</h3>
-            <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-primary-content md:text-base">
-              {project.shortDescription}
-            </p>
+            <div
+              className="project-description mt-3 text-sm leading-7 text-primary-content md:text-base"
+              dangerouslySetInnerHTML={{ __html: project.shortDescription }}
+            />
 
             <div className="mt-8 flex flex-wrap gap-3">
               {project.livePreview && (

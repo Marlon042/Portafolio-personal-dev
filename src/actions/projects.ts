@@ -2,6 +2,7 @@
 
 import { supabase } from '@/lib/supabase'
 import { getSupabaseAdmin } from '@/lib/supabase-admin'
+import { sanitizeRequiredProjectDescription } from '@/lib/project-sanitize'
 
 interface ProjectInput {
   title: string
@@ -40,7 +41,7 @@ export async function createProject(input: ProjectInput) {
   const admin = getSupabaseAdmin()
   const { data, error } = await admin
     .from('projects')
-    .insert([{ ...input }])
+    .insert([{ ...input, short_description: sanitizeRequiredProjectDescription(input.short_description) }])
     .select()
     .single()
 
@@ -52,7 +53,13 @@ export async function updateProject(id: string, input: Partial<ProjectInput>) {
   const admin = getSupabaseAdmin()
   const { data, error } = await admin
     .from('projects')
-    .update({ ...input, updated_at: new Date().toISOString() })
+    .update({
+      ...input,
+      ...(input.short_description !== undefined && {
+        short_description: sanitizeRequiredProjectDescription(input.short_description),
+      }),
+      updated_at: new Date().toISOString(),
+    })
     .eq('id', id)
     .select()
     .single()

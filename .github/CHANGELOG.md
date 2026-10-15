@@ -2,6 +2,31 @@
 
 ## [No liberado]
 
+### Cambiado
+- **Edición de proyectos** — Reemplazado el campo de descripción de texto plano por el editor TipTap usado en el CMS del blog
+  - Admite formato de texto, encabezados, listas, enlaces, alineación e imágenes
+  - Las descripciones existentes en texto plano se cargan en el editor sin requerir migración de base de datos
+  - El HTML se sanitiza en el servidor antes de guardarse y se muestra formateado en las tarjetas y el diálogo de detalles
+
+## [No liberado]
+
+### Agregado
+- **Diálogo de detalles para proyectos** — Nuevo botón «Ver detalles» en las tarjetas de proyectos
+  - Muestra la descripción completa, categoría y enlaces disponibles a la demo y GitHub
+  - Galería interactiva con navegación, miniaturas y ampliación de imágenes
+  - Etiquetas de interfaz accesibles y traducciones de español e inglés
+
+### Cambiado
+- **Tarjetas de proyectos** — Descripción resumida a tres líneas para evitar el desplazamiento dentro de la tarjeta
+- **Acciones de proyectos** — Enlaces de demo y GitHub agrupados a la izquierda y botón de detalles alineado a la derecha
+- **Visor de imágenes** — La ampliación ocupa el viewport y conserva la imagen completa sin recortes ni desplazamiento
+
+### Corregido
+- Apertura del diálogo de detalles en modo de desarrollo con React Strict Mode
+- Cierre del visor ampliado y del diálogo con la tecla Escape
+
+## [No liberado]
+
 ### Agregado
 - **Migración a Vercel** — Hosting migrado de Netlify a Vercel
   - Proyecto: `marlongv-portfolio` → dominio `https://marlongv.vercel.app`

@@ -142,7 +142,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data, index = 0 }) => {
         <div>
           <div className="bg-primary text-primary-content relative my-4 overflow-hidden rounded-2xl">
             <div className="px-4 py-2">
-              <p className="line-clamp-3 text-[14px] font-normal md:text-base">{shortDescription}</p>
+              <div
+                className="project-description project-description--preview line-clamp-3 text-[14px] font-normal md:text-base"
+                dangerouslySetInnerHTML={{ __html: shortDescription }}
+              />
             </div>
           </div>
 

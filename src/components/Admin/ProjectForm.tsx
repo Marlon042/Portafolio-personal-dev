@@ -4,6 +4,7 @@ import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import ImageUpload from './ImageUpload'
 import GalleryUpload from './GalleryUpload'
+import TipTapEditor from './TipTapEditor'
 import { createProject, updateProject } from '@/actions/projects'
 
 interface ProjectData {
@@ -26,6 +27,17 @@ interface ProjectFormProps {
   initialData?: ProjectData
   projectId?: string
   action: 'create' | 'update'
+}
+
+function getInitialDescriptionHtml(description: string | undefined): string {
+  if (!description) return ''
+  if (/^\s*<(p|h[2-4]|ul|ol|blockquote|pre)\b/i.test(description)) return description
+  const escaped = description
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\r?\n/g, '<br>')
+  return `<p>${escaped}</p>`
 }
 
 export default function ProjectForm({ initialData, projectId, action }: ProjectFormProps) {
@@ -58,6 +70,13 @@ export default function ProjectForm({ initialData, projectId, action }: ProjectF
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setError('')
+    const descriptionText = new DOMParser()
+      .parseFromString(form.short_description, 'text/html')
+      .body.textContent?.trim()
+    if (!descriptionText) {
+      setError('Description is required')
+      return
+    }
     setLoading(true)
 
     try {
@@ -91,8 +110,12 @@ export default function ProjectForm({ initialData, projectId, action }: ProjectF
 
       <div>
         <label className="mb-1 block text-sm text-[#607b96]" htmlFor="short_description">Description *</label>
-        <textarea id="short_description" name="short_description" value={form.short_description} onChange={handleChange} required rows={4}
-          className="w-full rounded border border-[#607b96] bg-[#011627] px-3 py-2 text-white outline-none focus:border-[#18f2e5]" />
+        <TipTapEditor
+          id="short_description"
+          initialHtml={getInitialDescriptionHtml(initialData?.short_description)}
+          placeholder="Describe el proyecto…"
+          onChange={(html) => setForm((prev) => ({ ...prev, short_description: html }))}
+        />
       </div>
 
       <ImageUpload
