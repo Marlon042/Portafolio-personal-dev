@@ -185,7 +185,7 @@ const ProjectDetailsDialog: React.FC<ProjectDetailsDialogProps> = ({ project, im
 
         {zoomOpen && images[activeImage] && (
           <div
-            className="absolute inset-0 z-20 flex items-center justify-center bg-black/95 p-4"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-14"
             onClick={() => setZoomOpen(false)}
           >
             <button
@@ -196,13 +196,15 @@ const ProjectDetailsDialog: React.FC<ProjectDetailsDialogProps> = ({ project, im
             >
               <CloseIcon className="size-5" />
             </button>
-            <Image
-              src={images[activeImage]}
-              alt={`${project.title} — ${activeImage + 1}`}
-              fill
-              sizes="100vw"
-              className="pointer-events-none object-contain p-12"
-            />
+            <div className="relative h-full w-full max-w-screen-xl">
+              <Image
+                src={images[activeImage]}
+                alt={`${project.title} — ${activeImage + 1}`}
+                fill
+                sizes="100vw"
+                className="pointer-events-none object-contain"
+              />
+            </div>
           </div>
         )}
       </div>

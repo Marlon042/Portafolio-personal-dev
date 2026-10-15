@@ -146,17 +146,29 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data, index = 0 }) => {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
-            {livePreview && (
-              <a
-                href={livePreview}
-                className="text-accent flex gap-2 text-sm underline underline-offset-[3px] transition-all duration-75 ease-linear hover:scale-105 md:text-base"
-                target="_blank"
-                rel="noopener noreferrer">
-                <PreviewIcon className="h-auto w-[18px] md:w-5" />
-                <span>Live Preview</span>
-              </a>
-            )}
+          <div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-3">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+              {livePreview && (
+                <a
+                  href={livePreview}
+                  className="text-accent flex gap-2 text-sm underline underline-offset-[3px] transition-all duration-75 ease-linear hover:scale-105 md:text-base"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  <PreviewIcon className="h-auto w-[18px] md:w-5" />
+                  <span>Live Preview</span>
+                </a>
+              )}
+              {githubLink && (
+                <a
+                  href={githubLink}
+                  className="text-accent flex gap-2 text-sm underline underline-offset-[3px] transition-all duration-75 ease-linear hover:scale-105 md:text-base"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  <GithubIcon className="w-[18px] md:w-5" />
+                  <span>Github Link</span>
+                </a>
+              )}
+            </div>
             <button
               type="button"
               onClick={() => setDetailsOpen(true)}
@@ -168,16 +180,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data, index = 0 }) => {
               </svg>
               <span>{t('projects.details')}</span>
             </button>
-            {githubLink && (
-              <a
-                href={githubLink}
-                className="text-accent flex gap-2 text-sm underline underline-offset-[3px] transition-all duration-75 ease-linear hover:scale-105 md:text-base"
-                target="_blank"
-                rel="noopener noreferrer">
-                <GithubIcon className="w-[18px] md:w-5" />
-                <span>Github Link</span>
-              </a>
-            )}
           </div>
         </div>
       </div>
