@@ -44,6 +44,10 @@ const es = {
   'services.subtitle': 'Ofrezco una amplia gama de servicios para asegurar el mejor código escrito y mantenerte a la vanguardia',
   'support.title': '// Soporte Técnico y Mantenimiento',
   'support.subtitle': 'Haz clic para expandir/colapsar el contenido del acordeón',
+  'studyPlan.title': 'Mi camino en Ingeniería en Sistemas',
+  'studyPlan.description':
+    'Actualmente estudio Ingeniería en Sistemas. Consulta el plan de estudios de la carrera y conoce las áreas de formación que forman parte de este recorrido.',
+  'studyPlan.link': 'Ver plan de estudios (PDF)',
   'contact.letsTalk': 'Hablemos',
   'contact.help': 'Estoy listo para ayudarle',
   'contact.subtitle': 'Construyo aplicaciones pensadas para resolver necesidades reales',
@@ -109,6 +113,10 @@ const en: Record<string, string> = {
   'services.subtitle': 'I offer a wide range of services to ensure you have the best written code',
   'support.title': '// Technical Support & Maintenance',
   'support.subtitle': 'Click to expand/collapse accordion content',
+  'studyPlan.title': 'My Systems Engineering journey',
+  'studyPlan.description':
+    'I am currently studying Systems Engineering. View the program curriculum and explore the areas of study that shape this journey.',
+  'studyPlan.link': 'View study plan (PDF)',
   'contact.letsTalk': "Let's talk",
   'contact.help': "I'm ready to help you",
   'contact.subtitle': 'I build applications designed to solve real needs',

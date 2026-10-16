@@ -2,6 +2,13 @@
 
 ## [No liberado]
 
+### Agregado
+- **Sección del plan de estudios** — Presentación breve de la carrera de Ingeniería en Sistemas después de los acordeones
+  - Enlace al brochure PDF que abre el documento en una pestaña nueva
+  - Texto localizado en español e inglés
+
+## [No liberado]
+
 ### Cambiado
 - **Edición de proyectos** — Reemplazado el campo de descripción de texto plano por el editor TipTap usado en el CMS del blog
   - Admite formato de texto, encabezados, listas, enlaces, alineación e imágenes

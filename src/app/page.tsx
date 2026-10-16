@@ -4,6 +4,7 @@ import ProjectsAccordion from '@/components/Projects/ProjectsAccordion'
 import DynamicAccordion from '@/components/DynamicAccordion'
 import Skills from '@/components/Skills/Skills'
 import ScrollProgressBar from '@/components/ScrollProgressBar'
+import StudyPlanSection from '@/components/StudyPlanSection'
 
 export default async function Home() {
   return (
@@ -15,6 +16,7 @@ export default async function Home() {
         <ProjectsAccordion />
         <DynamicAccordion identifier="services" />
         <DynamicAccordion identifier="support" />
+        <StudyPlanSection />
         <ContactSection />
       </div>
     </main>
