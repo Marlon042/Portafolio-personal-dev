@@ -2,6 +2,13 @@
 
 ## [No liberado]
 
+### Cambiado
+- **Inicio de sesión del panel admin** — Rediseñada la pantalla con identidad visual del portafolio, descripción del panel, formulario accesible y adaptación al alto disponible
+  - Interfaz en español, botón para mostrar/ocultar contraseña y estados de carga y error más claros
+  - Navbar simplificada con retorno al portafolio; se ocultan los controles globales de tema e idioma en rutas de administración
+
+## [No liberado]
+
 ### Agregado
 - **Acceso de administración en la navbar** — Ícono de escudo con usuario que enlaza al login del panel y muestra el tooltip «Gestión del admin»
 

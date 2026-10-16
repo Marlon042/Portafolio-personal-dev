@@ -75,43 +75,57 @@ const Navbar = () => {
           </div>
         </Link>
 
-        <div className="flex items-center lg:hidden">
-          <AdminAccessLink label={adminLabel} />
-          <button type="button" onClick={toggleMenu} aria-label={t('nav.menu')}>
-            {isVisible ? <CloseIcon className="text-primary-content" /> : <BurgerIcon className="text-primary-content" />}
-          </button>
-        </div>
+        {pathname === '/admin/login' ? (
+          <Link
+            href="/"
+            className="rounded-lg px-2 py-2 text-sm font-medium text-primary-content transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-3"
+          >
+            <span className="hidden sm:inline">Volver al portafolio</span>
+            <span className="sm:hidden">Portafolio</span>
+          </Link>
+        ) : (
+          <>
+            <div className="flex items-center lg:hidden">
+              <AdminAccessLink label={adminLabel} />
+              <button type="button" onClick={toggleMenu} aria-label={t('nav.menu')}>
+                {isVisible ? <CloseIcon className="text-primary-content" /> : <BurgerIcon className="text-primary-content" />}
+              </button>
+            </div>
 
-        <ul
-          className={`${isVisible ? 'flex' : 'hidden'} animate-fade-in bg-primary absolute top-16 left-0 z-10 h-dvh w-dvw flex-col lg:static lg:top-0 lg:flex lg:h-full lg:min-w-0 lg:flex-1 lg:flex-row lg:justify-end`}>
-          {navItems.map(({ labelKey, href, icon: Icon }) => (
-            <li
-              key={href}
-              onClick={() => setIsVisible(false)}
-              className="border-border flex items-center border-b px-4 text-2xl lg:min-w-0 lg:flex-1 lg:border-y-0 lg:border-e lg:px-1 lg:text-sm lg:first:border-s xl:px-2">
+            <ul
+              className={`${isVisible ? 'flex' : 'hidden'} animate-fade-in bg-primary absolute top-16 left-0 z-10 h-dvh w-dvw flex-col lg:static lg:top-0 lg:flex lg:h-full lg:min-w-0 lg:flex-1 lg:flex-row lg:justify-end`}>
+              {navItems.map(({ labelKey, href, icon: Icon }) => (
+                <li
+                  key={href}
+                  onClick={() => setIsVisible(false)}
+                  className="border-border flex items-center border-b px-4 text-2xl lg:min-w-0 lg:flex-1 lg:border-y-0 lg:border-e lg:px-1 lg:text-sm lg:first:border-s xl:px-2">
+                  <Link
+                    href={href}
+                    className={`text-primary-content hover:text-neutral flex w-full items-center gap-2 py-7 transition-all duration-150 lg:justify-center lg:gap-1.5 lg:py-0 ${pathname === href ? 'text-neutral cursor-text' : ''}`}>
+                    <Icon className="h-6 w-6 shrink-0" />
+                    <span className="lg:break-words lg:text-center lg:leading-tight">{t(labelKey)}</span>
+                  </Link>
+                </li>
+              ))}
+              <li className="border-border flex items-center border-b px-4 text-2xl lg:min-w-0 lg:flex-1 lg:border-y-0 lg:border-e lg:px-1 lg:text-sm xl:px-2">
               <Link
-                href={href}
-                className={`text-primary-content hover:text-neutral flex w-full items-center gap-2 py-7 transition-all duration-150 lg:justify-center lg:gap-1.5 lg:py-0 ${pathname === href ? 'text-neutral cursor-text' : ''}`}>
-                <Icon className="h-6 w-6 shrink-0" />
-                <span className="lg:break-words lg:text-center lg:leading-tight">{t(labelKey)}</span>
+                href="/#contact"
+                onClick={() => setIsVisible(false)}
+                className="text-primary-content hover:text-neutral flex w-full items-center gap-2 py-7 transition-all duration-150 lg:justify-center lg:gap-1.5 lg:py-0">
+                <PhoneIcon className="h-6 w-6 shrink-0" />
+                <span className="lg:break-words lg:text-center lg:leading-tight">{t('nav.contactMe')}</span>
               </Link>
-            </li>
-          ))}
-          <li className="border-border flex items-center border-b px-4 text-2xl lg:min-w-0 lg:flex-1 lg:border-y-0 lg:border-e lg:px-1 lg:text-sm xl:px-2">
-            <Link
-              href="/#contact"
-              onClick={() => setIsVisible(false)}
-              className="text-primary-content hover:text-neutral flex w-full items-center gap-2 py-7 transition-all duration-150 lg:justify-center lg:gap-1.5 lg:py-0">
-              <PhoneIcon className="h-6 w-6 shrink-0" />
-              <span className="lg:break-words lg:text-center lg:leading-tight">{t('nav.contactMe')}</span>
-            </Link>
-          </li>
-        </ul>
+              </li>
+            </ul>
+          </>
+        )}
       </div>
-      <AdminAccessLink
-        label={adminLabel}
-        className="hidden lg:!absolute lg:top-1/2 lg:right-4 lg:flex lg:-translate-y-1/2"
-      />
+      {pathname !== '/admin/login' && (
+        <AdminAccessLink
+          label={adminLabel}
+          className="hidden lg:!absolute lg:top-1/2 lg:right-4 lg:flex lg:-translate-y-1/2"
+        />
+      )}
     </nav>
   )
 }

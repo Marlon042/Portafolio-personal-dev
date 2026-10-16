@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import { useLanguage } from '@/context/LanguageContext'
 import useOutsideClick from '@/hooks/useOutsideClick'
@@ -16,9 +17,12 @@ const ThemeMenu = () => {
   const [themes, setThemes] = useState<ThemeItem[]>([])
   const [showThemeMenu, setShowThemeMenu] = useState(false)
   const { t } = useLanguage()
+  const pathname = usePathname()
   const menuRef = useOutsideClick(() => setShowThemeMenu(false))
 
   useEffect(() => {
+    if (pathname.startsWith('/admin')) return
+
     const init = async () => {
       const { data } = await supabase.from('themes').select('name, colors')
       setThemes(data ?? [])
@@ -30,7 +34,7 @@ const ThemeMenu = () => {
     }
 
     init()
-  }, [])
+  }, [pathname])
 
   useEffect(() => {
     if (window) document.documentElement.setAttribute('data-theme', theme)
@@ -42,6 +46,8 @@ const ThemeMenu = () => {
       localStorage.setItem('theme', theme)
     }
   }
+
+  if (pathname.startsWith('/admin')) return null
 
   return (
     <div ref={menuRef} className="fixed right-6 bottom-4 z-50 md:right-11 md:bottom-11">
