@@ -94,17 +94,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data, index = 0 }) => {
         style={{ transitionDelay: `${index * 100}ms` }}
       >
         <div className="flex items-start justify-between gap-2">
-          <div className="flex-1">
+          <div className="min-w-0 flex-1">
             <div className="flex flex-col flex-wrap gap-3 sm:flex-row sm:items-center">
               <h3 className="text-secondary-content text-lg font-medium md:font-semibold">{title}</h3>
               {type && (
                 <span
-                  className={`h-7 w-fit rounded-md bg-[#FFFFFF1A] p-1 text-sm ${type === 'New 🔥' ? 'animate-blink text-tag' : 'text-accent'} backdrop-blur-[80px]`}>
+                  className={`inline-flex h-7 w-fit shrink-0 items-center whitespace-nowrap rounded-md bg-[#FFFFFF1A] px-1 text-xs sm:px-2 sm:text-sm ${type === 'New 🔥' ? 'animate-blink text-tag' : 'text-accent'} backdrop-blur-[80px]`}>
                   {type}
                 </span>
               )}
             </div>
-            <ul className="mt-3 flex flex-col flex-wrap gap-2 sm:flex-row sm:gap-4">
+            <ul className="mt-4 flex flex-col flex-wrap gap-2 sm:flex-row sm:gap-4">
               {(visitors || numberOfSales) && (
                 <IconText text={(visitors || numberOfSales)?.toString() || ''} icon={Likes} />
               )}
@@ -127,7 +127,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data, index = 0 }) => {
                 width={150}
                 height={80}
                 alt={`${title} — ${t('projects.image')} 1`}
-                className="h-[80px] w-[150px] rounded-md object-cover shadow-[0px_1.66px_3.74px_-1.25px_#18274B1F]"
+                className="h-14 w-[72px] shrink-0 rounded-md object-cover shadow-[0px_1.66px_3.74px_-1.25px_#18274B1F] md:h-[80px] md:w-[150px]"
               />
               <div className="absolute inset-0 flex items-center justify-center gap-1.5 rounded-md bg-black/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                 <EyeIcon className="size-4 text-white" />

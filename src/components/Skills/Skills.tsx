@@ -30,9 +30,11 @@ const IconRenderer = ({ iconId, size = 'sm' }: { iconId: string; size?: 'sm' | '
 const Skills: React.FC = () => {
   const { t } = useLanguage()
   const [skills, setSkills] = useState<SkillData[]>([])
-  const [mode, setMode] = useState<'marquee' | 'grid'>('marquee')
+  const [adminMode, setAdminMode] = useState<'marquee' | 'grid'>('marquee')
+  const [visitorMode, setVisitorMode] = useState<'marquee' | 'grid' | null>(null)
   const [marqueeDuration, setMarqueeDuration] = useState(20000)
   const initLoaded = useRef(false)
+  const mode = visitorMode ?? adminMode
 
   useEffect(() => {
     if (initLoaded.current) return
@@ -45,7 +47,7 @@ const Skills: React.FC = () => {
     ]).then(([{ data }, config, icons]) => {
       if (data) setSkills(data as SkillData[])
       if (config.marquee_duration) setMarqueeDuration(config.marquee_duration)
-      if (config.skills_display_mode) setMode(config.skills_display_mode)
+      if (config.skills_display_mode) setAdminMode(config.skills_display_mode)
       icons.forEach((icon) => {
         if (!icon.is_bundled && icon.svg_content) {
           customSvgCache.set(icon.id, icon.svg_content)
@@ -64,16 +66,50 @@ const Skills: React.FC = () => {
       .on('postgres_changes', { event: '*', schema: 'public', table: 'site_config' }, async () => {
         const config = await getSiteConfig()
         if (config.marquee_duration) setMarqueeDuration(config.marquee_duration)
-        if (config.skills_display_mode) setMode(config.skills_display_mode)
+        if (config.skills_display_mode) setAdminMode(config.skills_display_mode)
       })
       .subscribe()
     return () => { supabase.removeChannel(channel) }
   }, [])
 
+  const toggleMode = () => {
+    setVisitorMode(mode === 'marquee' ? 'grid' : 'marquee')
+  }
+
   return (
     <section id="skills">
       <div className="mx-auto my-8 max-w-[1200px] px-4 md:my-[3.75rem]">
-        <SectionHeading title={t('skills.title')} />
+        <div className="flex items-center justify-between gap-4">
+          <SectionHeading title={t('skills.title')} />
+          <button
+            type="button"
+            role="switch"
+            aria-checked={mode === 'grid'}
+            aria-label={t('skills.toggleView')}
+            onClick={toggleMode}
+            className="relative inline-flex h-7 w-12 shrink-0 items-center rounded-full border border-border bg-secondary p-0.5 transition-colors hover:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            <span
+              aria-hidden="true"
+              className={`flex size-5 items-center justify-center rounded-full bg-accent text-primary shadow-sm transition-transform ${
+                mode === 'grid' ? 'translate-x-5' : 'translate-x-0'
+              }`}
+            >
+              {mode === 'grid' ? (
+                <svg className="size-3" viewBox="0 0 12 12" fill="currentColor">
+                  <rect x="1" y="1" width="4" height="4" rx="1" />
+                  <rect x="7" y="1" width="4" height="4" rx="1" />
+                  <rect x="1" y="7" width="4" height="4" rx="1" />
+                  <rect x="7" y="7" width="4" height="4" rx="1" />
+                </svg>
+              ) : (
+                <svg className="size-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.4">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2 4h8M2 8h8M4 2 2 4l2 2m4 0 2 2-2 2" />
+                </svg>
+              )}
+            </span>
+          </button>
+        </div>
       </div>
       {mode === 'marquee' ? (
         <MarqueeWrapper duration={marqueeDuration} className="from-primary to-primary via-marquee bg-linear-to-r">

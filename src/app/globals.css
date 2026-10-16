@@ -364,6 +364,25 @@ section {
   }
 }
 
+.project-description--details {
+  p,
+  li,
+  pre {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  pre code {
+    white-space: inherit;
+    overflow-wrap: inherit;
+  }
+}
+
 .project-description--preview {
   p,
   h2,

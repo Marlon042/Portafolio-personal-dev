@@ -2,6 +2,20 @@
 
 ## [No liberado]
 
+### Corregido
+- **Diálogo de detalles de proyectos** — La descripción se ajusta al ancho disponible y se justifica sin provocar desplazamiento horizontal en escritorio ni móvil
+- **Bloques de código en proyectos** — El texto de código ahora se ajusta al ancho disponible y se justifica dentro del diálogo de detalles
+
+## [No liberado]
+
+### Agregado
+- **Toggle de conocimientos técnicos** — Permite a cada visitante alternar la presentación de las habilidades desde el encabezado de la sección
+
+### Corregido
+- **Tarjetas de proyectos en móvil** — La miniatura ahora ocupa menos espacio y las etiquetas de tipo no se parten en varias líneas
+
+## [No liberado]
+
 ### Cambiado
 - **Inicio de sesión del panel admin** — Rediseñada la pantalla con identidad visual del portafolio, descripción del panel, formulario accesible y adaptación al alto disponible
   - Interfaz en español, botón para mostrar/ocultar contraseña y estados de carga y error más claros

@@ -74,8 +74,8 @@ const ProjectDetailsDialog: React.FC<ProjectDetailsDialogProps> = ({ project, im
           </button>
         </div>
 
-        <div className="grid md:grid-cols-[1.15fr_0.85fr]">
-          <section className="p-4 md:p-8" aria-label={t('projects.gallery')}>
+        <div className="grid min-w-0 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+          <section className="min-w-0 p-4 md:p-8" aria-label={t('projects.gallery')}>
             <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-primary">
               {images[activeImage] ? (
                 <>
@@ -145,7 +145,7 @@ const ProjectDetailsDialog: React.FC<ProjectDetailsDialogProps> = ({ project, im
             )}
           </section>
 
-          <section className="flex flex-col border-t border-white/10 p-5 md:border-t-0 md:border-l md:p-8">
+          <section className="flex min-w-0 flex-col border-t border-white/10 p-5 md:border-t-0 md:border-l md:p-8">
             {project.type && (
               <span className="mb-5 w-fit rounded-md bg-white/10 px-3 py-1.5 text-sm text-accent">
                 {project.type}
@@ -153,7 +153,7 @@ const ProjectDetailsDialog: React.FC<ProjectDetailsDialogProps> = ({ project, im
             )}
             <h3 className="text-base font-semibold text-white">{t('projects.description')}</h3>
             <div
-              className="project-description mt-3 text-sm leading-7 text-primary-content md:text-base"
+              className="project-description project-description--details mt-3 w-full min-w-0 text-sm leading-7 text-primary-content md:text-base"
               dangerouslySetInnerHTML={{ __html: project.shortDescription }}
             />
 
