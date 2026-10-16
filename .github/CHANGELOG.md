@@ -3,6 +3,16 @@
 ## [No liberado]
 
 ### Agregado
+- **Acceso de administración en la navbar** — Ícono de escudo con usuario que enlaza al login del panel y muestra el tooltip «Gestión del admin»
+
+### Cambiado
+- **Navbar responsive** — Se conserva el espacio entre la marca y los enlaces; el acceso admin se ancla cerca del borde derecho sin alterar la distribución principal
+- **Ícono de administración** — Escudo con usuario más visible, con mayor tamaño y un área de interacción clara
+- **Navegación de escritorio** — Las etiquetas largas se ajustan dentro del espacio disponible sin invadir el acceso admin
+
+## [No liberado]
+
+### Agregado
 - **Sección del plan de estudios** — Presentación breve de la carrera de Ingeniería en Sistemas después de los acordeones
   - Enlace al brochure PDF que abre el documento en una pestaña nueva
   - Texto localizado en español e inglés
