@@ -2,6 +2,12 @@
 
 ## [No liberado]
 
+### Cambiado
+- **Ilustración principal** — Sustituido el emblema de calavera en la laptop por el logotipo de la UNA; ahora es un poco más grande y conserva un aspecto discreto
+- **Ilustración del hero** — Cambiado el cabello del personaje a color café oscuro, conservando luces y sombras
+
+## [No liberado]
+
 ### Corregido
 - **Diálogo de detalles de proyectos** — La descripción se ajusta al ancho disponible y se justifica sin provocar desplazamiento horizontal en escritorio ni móvil
 - **Bloques de código en proyectos** — El texto de código ahora se ajusta al ancho disponible y se justifica dentro del diálogo de detalles
