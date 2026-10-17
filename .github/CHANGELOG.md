@@ -3,6 +3,11 @@
 ## [No liberado]
 
 ### Cambiado
+- **Sección de contacto** — El número telefónico ahora incluye el ícono de WhatsApp y abre un chat nuevo con un mensaje de contacto prellenado
+
+## [No liberado]
+
+### Cambiado
 - **Ilustración principal** — Sustituido el emblema de calavera en la laptop por el logotipo de la UNA; ahora es un poco más grande y conserva un aspecto discreto
 - **Ilustración del hero** — Cambiado el cabello del personaje a color café oscuro, conservando luces y sombras
 
